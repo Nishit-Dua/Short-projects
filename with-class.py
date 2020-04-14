@@ -3,8 +3,7 @@ import random
 class TaskList:
 
 	def __init__(self):
-		# self.EPOCHS = int(input("enter number of tasks : "))
-		self.EPOCHS = 2
+		self.EPOCHS = int(input("enter number of tasks : "))
 		
 	def order_tasks(self):
 		random_list = []
@@ -38,8 +37,14 @@ class TaskList:
 		for task in sorted_random_list:
 			sorted_task_dict[task] = task_dict[task]
 
-		return sorted_task_dict
+		return sorted_random_list , sorted_task_dict
+
+	def print_result(self):
+		sorted_random_list , tasks = self.sort_dict()
+		print('\nFirstly {}'.format(tasks[1]) , end ='')
+		for task_num in range(2 , self.EPOCHS):
+			print(", then {}".format(tasks[task_num]) , end ='')
+		print(', then Finally {}'.format(tasks[self.EPOCHS]))
 
 task = TaskList()
-
-print('\n\n',task.sort_dict(), '\n')
+task.print_result()
