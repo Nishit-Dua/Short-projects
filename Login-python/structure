@@ -1,0 +1,61 @@
+Files :
+
+	logic.py
+	save data.csv
+
+class USER :
+
+	init :	
+
+		Email-id
+		user name
+		passwd
+
+
+	classmethod:
+
+		is password valid
+		encrypt
+		read encrypted key from csv
+		check both keys (login)
+
+
+	Methords :
+
+		remove
+		change passwd
+		change user name
+		exit out
+
+Functions:
+	
+	check_existance
+	signup_fxn
+
+print(LOGIN? dont have acnt enter sign-up) 
+
+if not signup :
+
+	print(ID/USER)
+	take input
+
+	if check_existance()
+		then input = USER()
+		ask for pass and encrypt
+
+		if input.check both keys():
+			succesfully loged in
+
+		else:
+			wrong pass
+			print(try again?):
+				if try again 
+
+				else :
+					start again
+
+	if not check_existance:
+		sorry lool make account
+
+if signup :
+	signup_fxn()
