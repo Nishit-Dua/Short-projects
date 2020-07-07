@@ -5,7 +5,7 @@ mainDf.set_index('email', inplace=True)
 
 class User():
 
-    def __init__(self, email, passwd):
+    def __init__(self, email: str, passwd=None):
         '''
         initializing the class
         '''
@@ -14,10 +14,6 @@ class User():
         if self.user_exist():
             name = mainDf.loc[self.email]['uname']
             print(f'Welcome back {name}')
-        else:
-            print('Sorry We could not find you in our records\
- are you sure you entered the correct email and password ?\nIf You\
- Haven\'t signed up yet! sign up Now!!! ')
 
     def user_exist(self):
         '''
@@ -28,5 +24,37 @@ class User():
         else:
             return False
 
+    def sign_up(self):
+        '''
+        if email doesn't exists appends the new user to csv
+        '''
+        if self.email in mainDf.index:
+            print('User Aready Exists!! try remembering the\
+ correct password xD ')
+        else:
+            name = input('Enter Your Username: ')
+            self.passwd = input('Enter Your New Password: ')
+            while self.passwd == '!!':
+                self.passwd = input('Invalid Password try again: ')
+            with open('./user_pass.csv', 'a') as df:
+                df.write(f'\n{",".join([name, self.email,self.passwd])}')
 
-User('f20180620@gmail.com', 'lmaomyass')
+
+if __name__ == "__main__":
+    print('Welcome to this short Login-System :D')
+    email = input('Enter Your email address: ')
+    if email not in mainDf.index:
+        yn = input('You Currently dont have your email registered press\
+ "y" to sign up: ')
+        if yn.lower() != 'y':
+            print('You need to sign up before using it, Good Bye for now')
+        else:
+            person = User(email)
+            person.sign_up()
+            print('Congrats on Signing Up yay !!')
+    else:
+        passwd = input('Enter your password: ')
+        person = User(email, passwd)
+        while not person.user_exist() or passwd == '!!':
+            passwd = input('Wrong PassWord try agian or enter !! to quit: ')
+            person = User(email, passwd)
